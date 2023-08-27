@@ -8,6 +8,12 @@ inputs:
     required: false
     default: "18.x"
 
+  restore-build:
+    description: "Retrieve the build artifact for this commit"
+    type: "boolean"
+    required: false
+    default: true
+
 runs:
   using: "composite"
   steps:
@@ -24,6 +30,7 @@ runs:
         key: ${{ hashFiles('package-lock.json', 'package.json') }}
 
     - uses: actions/download-artifact@v3
+      if: restore-build
       with:
         name: build-${{ github.sha }}
 
