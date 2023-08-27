@@ -1,0 +1,33 @@
+name: "Test"
+description: "Tests a node project"
+
+inputs:
+  node-version:
+    description: "Node version"
+    type: "string"
+    required: false
+    default: "18.x"
+
+runs:
+  using: "composite"
+
+jobs:
+  test:
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ inputs.node-version }}
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Restore cached dependencies
+        id: npm-cache-restore
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: hashFiles('package-lock.json', 'package.json')
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: build-${{ github.ref }}
+
+      - run: npm test
