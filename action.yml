@@ -29,8 +29,9 @@ runs:
         path: node_modules
         key: ${{ hashFiles('package-lock.json', 'package.json') }}
 
-    - uses: actions/download-artifact@v3
-      if: inputs.restore-build
+    - name: Restore build artifact
+      if: ${{ inputs.restore-build }}
+      uses: actions/download-artifact@v3
       with:
         name: build-${{ github.sha }}
 
