@@ -30,7 +30,7 @@ runs:
         key: ${{ hashFiles('package-lock.json', 'package.json') }}
 
     - uses: actions/download-artifact@v3
-      if: restore-build
+      if: inputs.restore-build
       with:
         name: build-${{ github.sha }}
 
