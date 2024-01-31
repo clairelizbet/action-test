@@ -6,7 +6,7 @@ inputs:
     description: "Node version"
     type: "string"
     required: false
-    default: "18.x"
+    default: "20.x"
 
   restore-build:
     description: "Retrieve the build artifact for this commit"
