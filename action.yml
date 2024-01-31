@@ -17,8 +17,8 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.node-version }}
         registry-url: "https://registry.npmjs.org"
@@ -30,7 +30,7 @@ runs:
 
     - name: Restore build artifact
       if: inputs.restore-build == true
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: build-${{ github.sha }}
 
